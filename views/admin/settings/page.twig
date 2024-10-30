@@ -1,0 +1,46 @@
+<div class="wrap">
+  <h1 class="crm-salesforce-learndash-integration-settings-header">{{ __( 'Salesforce Settings', 'crm-salesforce-learndash-integration' ) }}</h1>
+  <form method="post" action="options.php">
+    <div class="sfwd_options_wrapper sfwd_settings_left">
+      <div id="advanced-sortables" class="meta-box-sortables">
+        {{ function('settings_fields', 'learndash_salesforce_settings_group') }}
+        {% for options in optionss %}
+          {% for key, option in options %}
+            {% if option.type == 'heading' %}
+              <div class="postbox crm-salesforce-learndash-integration-settings-postbox">
+                <div class="handlediv" title="{{ __( 'Click to toggle', 'crm-salesforce-learndash-integration' ) }}"><br></div>
+                <h2 class="hndle"><span>{{ option.name }}</span></h2>
+                <div class="inside">
+                  <div class="sfwd sfwd_options">
+            {% else %}
+                    <div class="sfwd_input" id="sfwd-salesforce_{{ key }}">
+                      <span class="sfwd_option_label" style="text-align:right;vertical-align:top;">
+                        <a class="sfwd_help_text_link" style="cursor:pointer;" title="Click for Help!" onclick="toggleVisibility('sfwd-salesforce_{{ key }}_tip');">
+                          <img src="{{ q_img }}">
+                          <label class="sfwd_label textinput">{{ option.name }}</label>
+                        </a>
+                      </span>
+                      <span class="sfwd_option_input">
+                        <div class="sfwd_option_div">
+                          {% include 'admin/settings/fields/'~option.type~'.twig' with option %}
+                        </div>
+                        <div class="sfwd_help_text_div" style="display:none" id="sfwd-salesforce_{{ key }}_tip"><label class="sfwd_help_text">{{ option.desc }}</label></div>
+                      </span>
+                      <p style="clear:left"></p>
+                    </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% if connected %}
+      {{ function('submit_button', __( 'Disconnect ×', 'crm-salesforce-learndash-integration' ), 'delete', 'disconnect') }}
+    {% else %}
+      {{ function('submit_button', __( 'Connect »', 'crm-salesforce-learndash-integration' )) }}
+    {% endif %}
+  </form>
+  {% include 'admin/credit.twig' %}
+</div>

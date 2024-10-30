@@ -1,0 +1,6 @@
+<select name="learndash_salesforce_settings[{{ key }}]">
+  <option value>- {{ __( 'Choose a page', 'crm-salesforce-learndash-integration' ) }} -</option>
+  {% for id, title in options %}
+    <option value="{{ id }}" {{ function('selected', id, value, false ) }}>{{ title }}</option>
+  {% endfor %}
+</select>

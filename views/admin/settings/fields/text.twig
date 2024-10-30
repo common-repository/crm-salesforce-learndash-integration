@@ -1,0 +1,5 @@
+<input type="text"
+  {% if readonly %} readonly="readonly" {% endif %}
+  {% if disabled %} disabled="disabled" {% endif %}
+  {% if placeholder %} placeholder="{{ placeholder }}" {% endif %}
+  name="learndash_salesforce_settings[{{ key }}]" autocomplete="off" value="{{ value }}" class="regular-text">
